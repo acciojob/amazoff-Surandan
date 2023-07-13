@@ -110,9 +110,6 @@ public class OrderRepository {
         int count = 0;
         for(String str : PartnerOrders.get(partnerId)) {
             int currTime = Integer.parseInt(orderObj.get(str).getDeliveryTime());
-            int gTime = 0;  // time conversion
-            gTime += Integer.parseInt(time.substring(0,2))*60;
-            gTime += Integer.parseInt(time.substring(3,5));
             if(currTime > Integer.parseInt(time)) count++;
         }
         return count;
