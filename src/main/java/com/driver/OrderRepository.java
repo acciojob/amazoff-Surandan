@@ -22,8 +22,7 @@ public class OrderRepository {
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
 
-        Order o = orderObj.getOrDefault(orderId,null);
-        if(o == null) {
+        if(!orderObj.containsKey(orderId)) {
             throw new RuntimeException("OrderId is not present in db");
         }
         partners.get(partnerId).setNumberOfOrders(partners.get(partnerId).getNumberOfOrders()+1);
@@ -78,9 +77,12 @@ public class OrderRepository {
 
     public void deletePartnerById(String partnerId) {
         List<String> currOrders = PartnerOrders.get(partnerId);
-        for(String str : currOrders) {
-            orders.put(str,0);
+        if(currOrders!= null) {
+            for(String str : currOrders) {
+                orders.put(str,0);
+            }
         }
+
         PartnerOrders.remove(partnerId);
         partners.remove(partnerId);
     }
@@ -108,6 +110,9 @@ public class OrderRepository {
         int count = 0;
         for(String str : PartnerOrders.get(partnerId)) {
             int currTime = Integer.parseInt(orderObj.get(str).getDeliveryTime());
+            int gTime = 0;  // time conversion
+            gTime += Integer.parseInt(time.substring(0,2))*60;
+            gTime += Integer.parseInt(time.substring(3,5));
             if(currTime > Integer.parseInt(time)) count++;
         }
         return count;
