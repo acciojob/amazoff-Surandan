@@ -59,9 +59,9 @@ public class OrderRepository {
 
     public int getCountOfUnassignedOrders() {
         int count = 0;
-        for (String s : orders.keySet()) {
-            if(orders.get(s) == 0) count++;
-        }
+//        for (String s : orders.keySet()) {
+//            if(orders.get(s) == 0) count++;
+//        }
         return count;
     }
 
