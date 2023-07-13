@@ -46,7 +46,7 @@ public class OrderService {
         return orderRepository.getCountOfUnassignedOrders();
     }
 
-    public String getLastDeliveryTimeByPartnerId(String partnerId) {
+    public Integer getLastDeliveryTimeByPartnerId(String partnerId) {
            return orderRepository.getLastDeliveryTimeByPartnerId(partnerId);
     }
 

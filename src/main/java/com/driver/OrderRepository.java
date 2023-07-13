@@ -65,12 +65,12 @@ public class OrderRepository {
         return count;
     }
 
-    public String getLastDeliveryTimeByPartnerId(String partnerId) {
-        String time = "0";
+    public Integer getLastDeliveryTimeByPartnerId(String partnerId) {
+        int time = 0;
         List<String> currOrders = PartnerOrders.get(partnerId);
         for(String str : currOrders) {
-            String nTIme = orderObj.get(str).getDeliveryTime();
-            if(Integer.parseInt(nTIme) > Integer.parseInt(time)) time = nTIme;
+            int nTIme = orderObj.get(str).getDeliveryTime();
+            if(nTIme > time) time = nTIme;
         }
         return time;
     }
@@ -109,7 +109,7 @@ public class OrderRepository {
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
         int count = 0;
         for(String str : PartnerOrders.get(partnerId)) {
-            int currTime = Integer.parseInt(orderObj.get(str).getDeliveryTime());
+            int currTime = orderObj.get(str).getDeliveryTime();
             if(currTime > Integer.parseInt(time)) count++;
         }
         return count;
